@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>西南数据中心 · 工作汇报</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  /* 单页版：导航变锚点跳转 */
+  .nav-links a{cursor:pointer}
+  .section{scroll-margin-top:80px}
+  .section-divider{
+    height:1px; background:linear-gradient(90deg,transparent,var(--line-strong),transparent);
+    margin:50px 0 0;
+  }
+  .section-block{
+    padding:30px 0;
+  }
+  /* 回到顶部按钮 */
+  .top-btn{
+    position:fixed; right:24px; bottom:24px; z-index:99;
+    width:44px; height:44px; border-radius:12px;
+    background:var(--grad); color:#001428;
+    display:grid; place-items:center;
+    box-shadow:0 8px 24px rgba(34,227,214,.3);
+    cursor:pointer; opacity:0; pointer-events:none;
+    transition: all .3s; font-weight:700; font-size:18px;
+    border:none;
+  }
+  .top-btn.show{opacity:1; pointer-events:auto}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <div class="brand-logo">SW</div>
+      <div class="brand-text">
+        <div>西南数据中心运营组</div>
+        <small>SOUTHWEST IDC OPERATION</small>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#sec-overview">总览</a>
+      <a href="#sec-parks">园区</a>
+      <a href="#sec-operation">运营质量</a>
+      <a href="#sec-delivery">工程交付</a>
+      <a href="#sec-cost">降本增效</a>
+      <a href="#sec-plan">重点项目</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container" id="top">
+
+  <!-- ========== Hero ========== -->
+  <section class="hero">
+    <span class="tag" id="metaTag">2026 · 季度汇报</span>
+    <h1 id="heroTitle">守牢底线 · 提质增效<br>西南基础设施运营工作汇报</h1>
+    <p class="lead">覆盖重庆、贵阳、成都三地园区的基础设施运营、工程交付、成本与团队建设。以"稳定运行"为基座，以"降本增效"为主线，围绕重点项目推进关键能力升级。</p>
+    <div class="hero-meta" id="heroMeta"></div>
+  </section>
+
+  <!-- ========== 1. 总览 KPI ========== -->
+  <section class="section section-block" id="sec-overview">
+    <div class="section-head">
+      <div class="bar"></div>
+      <h2>核心指标一览</h2>
+      <div class="desc" id="updateMeta">加载中…</div>
+    </div>
+    <div class="grid grid-4" id="kpiGrid"></div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ========== 2. 园区总览 ========== -->
+  <section class="section section-block" id="sec-parks">
+    <div class="section-head">
+      <div class="bar"></div>
+      <h2>园区总览</h2>
+      <div class="desc">三地园区分布与运行状态</div>
+    </div>
+
+    <!-- 地图示意 -->
+    <div class="chart-box" style="margin-bottom:20px">
+      <h3>三地园区地理示意</h3>
+      <div class="sub">点位为示意坐标，非精确地理位置</div>
+      <svg viewBox="0 0 900 320" style="width:100%;height:300px">
+        <defs>
+          <radialGradient id="pulse" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#22e3d6" stop-opacity=".6"/>
+            <stop offset="100%" stop-color="#22e3d6" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="ln" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#22e3d6" stop-opacity=".2"/>
+            <stop offset="100%" stop-color="#3f8cff" stop-opacity=".7"/>
+          </linearGradient>
+        </defs>
+        <g stroke="rgba(120,180,255,.08)" stroke-width="1">
+          <line x1="0" y1="80" x2="900" y2="80"/>
+          <line x1="0" y1="160" x2="900" y2="160"/>
+          <line x1="0" y1="240" x2="900" y2="240"/>
+          <line x1="200" y1="0" x2="200" y2="320"/>
+          <line x1="450" y1="0" x2="450" y2="320"/>
+          <line x1="700" y1="0" x2="700" y2="320"/>
+        </g>
+        <line x1="280" y1="180" x2="530" y2="120" stroke="url(#ln)" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <line x1="530" y1="120" x2="750" y2="200" stroke="url(#ln)" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <line x1="280" y1="180" x2="750" y2="200" stroke="url(#ln)" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <g transform="translate(280,180)">
+          <circle r="30" fill="url(#pulse)"/>
+          <circle r="8" fill="#22e3d6"/>
+          <text x="16" y="-14" fill="#eaf2ff" font-size="14" font-weight="600">成都</text>
+          <text x="16" y="4" fill="#a9bcd6" font-size="11" id="mapChengdu">- 个园区</text>
+        </g>
+        <g transform="translate(530,120)">
+          <circle r="38" fill="url(#pulse)"/>
+          <circle r="10" fill="#3f8cff"/>
+          <text x="18" y="-18" fill="#eaf2ff" font-size="14" font-weight="600">重庆（总部）</text>
+          <text x="18" y="2" fill="#a9bcd6" font-size="11" id="mapChongqing">- 个园区</text>
+        </g>
+        <g transform="translate(750,200)">
+          <circle r="28" fill="url(#pulse)"/>
+          <circle r="8" fill="#4ade80"/>
+          <text x="-20" y="28" fill="#eaf2ff" font-size="14" font-weight="600">贵阳</text>
+          <text x="-20" y="44" fill="#a9bcd6" font-size="11" id="mapGuiyang">- 个园区</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="grid grid-3" id="parkGrid"></div>
+
+    <div class="chart-box" style="margin-top:20px">
+      <h3>主要承载业务（按机柜占比）</h3>
+      <div class="chart-canvas" id="bizChart"></div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ========== 3. 运营质量 ========== -->
+  <section class="section section-block" id="sec-operation">
+    <div class="section-head">
+      <div class="bar"></div>
+      <h2>运营质量</h2>
+      <div class="desc">FOC 监控、事件与变更管理、SLA 达成</div>
+    </div>
+
+    <div class="grid grid-4" id="opKpiGrid" style="margin-bottom:20px"></div>
+
+    <div class="grid grid-2" style="margin-bottom:20px">
+      <div class="chart-box">
+        <h3>事件数量趋势（按级别）</h3>
+        <div class="sub">P1 / P2 / P3</div>
+        <div class="chart-canvas" id="eventChart"></div>
+      </div>
+      <div class="chart-box">
+        <h3>变更执行情况</h3>
+        <div class="sub">柱：变更数 / 折线：成功率</div>
+        <div class="chart-canvas" id="changeChart"></div>
+      </div>
+    </div>
+
+    <h3 style="margin:24px 0 12px;font-size:16px;color:var(--text-2)">典型事件复盘</h3>
+    <div id="incidentTable" style="margin-bottom:20px"></div>
+
+    <h3 style="margin:24px 0 12px;font-size:16px;color:var(--text-2)">应急演练进展</h3>
+    <div class="grid grid-3" id="drillGrid"></div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ========== 4. 工程交付 ========== -->
+  <section class="section section-block" id="sec-delivery">
+    <div class="section-head">
+      <div class="bar"></div>
+      <h2>工程交付</h2>
+      <div class="desc">SOP 标准化、A/B/C 分级、平台化建设</div>
+    </div>
+
+    <div class="grid grid-4" id="dvKpiGrid" style="margin-bottom:24px"></div>
+
+    <h3 style="margin:8px 0 12px;font-size:16px;color:var(--text-2)">零星改造标准流程（5 阶段）</h3>
+    <div class="grid" id="sopGrid" style="grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:24px"></div>
+
+    <h3 style="margin:24px 0 12px;font-size:16px;color:var(--text-2)">A / B / C 分级管理</h3>
+    <div class="grid grid-3" id="abcGrid" style="margin-bottom:24px"></div>
+
+    <div class="chart-box" style="margin-bottom:20px">
+      <h3>月度交付量 & 平均交付时长</h3>
+      <div class="sub">柱：单数 / 折线：平均天数</div>
+      <div class="chart-canvas" id="deliveryChart"></div>
+    </div>
+
+    <h3 style="margin:24px 0 12px;font-size:16px;color:var(--text-2)">平台化工具建设</h3>
+    <div class="grid grid-2" id="toolGrid"></div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ========== 5. 降本增效 ========== -->
+  <section class="section section-block" id="sec-cost">
+    <div class="section-head">
+      <div class="bar"></div>
+      <h2>降本增效</h2>
+      <div class="desc">PUE 治理、节能项目、电费优化</div>
+    </div>
+
+    <div class="grid grid-4" id="ctKpiGrid" style="margin-bottom:24px"></div>
+
+    <div class="chart-box" style="margin-bottom:20px">
+      <h3>月度 PUE 趋势</h3>
+      <div class="sub" id="pueTargetSub"></div>
+      <div class="chart-canvas" id="pueChart"></div>
+    </div>
+
+    <h3 style="margin:24px 0 12px;font-size:16px;color:var(--text-2)">重点节能项目</h3>
+    <div id="projTable" style="margin-bottom:24px"></div>
+
+    <div class="grid grid-2">
+      <div class="chart-box"><h3>能耗构成（按系统）</h3><div class="sub">当月均值</div><div class="chart-canvas" id="energyChart"></div></div>
+      <div class="chart-box"><h3>节能贡献（按项目）</h3><div class="sub">节电量分解</div><div class="chart-canvas" id="savingChart"></div></div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ========== 6. 重点项目与规划 ========== -->
+  <section class="section section-block" id="sec-plan">
+    <div class="section-head">
+      <div class="bar"></div>
+      <h2>重点项目与规划</h2>
+      <div class="desc">在建项目、里程碑、风险与资源诉求</div>
+    </div>
+
+    <h3 style="margin:8px 0 12px;font-size:16px;color:var(--text-2)">在建重点项目</h3>
+    <div id="planProjTable" style="margin-bottom:24px"></div>
+
+    <h3 style="margin:24px 0 12px;font-size:16px;color:var(--text-2)">下阶段关键里程碑</h3>
+    <div class="card" style="margin-bottom:24px"><div class="timeline" id="timeline"></div></div>
+
+    <h3 style="margin:24px 0 12px;font-size:16px;color:var(--text-2)">重点风险项</h3>
+    <div class="card" style="margin-bottom:24px"><ul class="risk-list" id="riskList"></ul></div>
+
+    <h3 style="margin:24px 0 12px;font-size:16px;color:var(--text-2)">资源与支持诉求</h3>
+    <div class="grid grid-3" id="resGrid"></div>
+  </section>
+
+  <div class="notice">
+    <b>数据说明：</b>本站数据由各园区/板块负责人在腾讯文档协作填报，按需触发同步刷新。点击右下角按钮可回到顶部。
+  </div>
+
+  <footer class="footer">
+    西南数据中心运营组 · 内部汇报材料 · 请勿外发 &nbsp;|&nbsp; Powered by WorkBuddy
+  </footer>
+</div>
+
+<button class="top-btn" id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script src="assets/chart.js"></script>
+<script src="assets/data.js"></script>
+<script>
+/* === 数据加载 + 渲染 === */
+(async ()=>{
+
+  // ---------- 1. overview ----------
+  const ov = await SWData.loadData('overview');
+  if(ov){
+    const m = ov.report_meta || {};
+    document.getElementById('metaTag').textContent = m.period ? `${m.period} · 季度汇报` : '季度汇报';
+    if(m.title || m.subtitle){
+      document.getElementById('heroTitle').innerHTML = `${SWData.htmlEscape(m.title||'')}<br>${SWData.htmlEscape(m.subtitle||'')}`;
+    }
+    document.getElementById('heroMeta').innerHTML = `
+      <span><b>汇报人</b>${SWData.htmlEscape(m.reporter||'')}</span>
+      <span><b>覆盖</b>三地多园区</span>
+      <span><b>周期</b>${SWData.htmlEscape(m.period||'')}</span>
+      <span><b>版本</b>${SWData.htmlEscape(m.version||'')}</span>
+    `;
+    SWData.renderMeta(m);
+    SWData.renderKpi(document.getElementById('kpiGrid'), ov.kpi || []);
+  }
+
+  // ---------- 2. parks ----------
+  const pk = await SWData.loadData('parks');
+  if(pk){
+    const cityCount = {};
+    (pk.parks||[]).forEach(p=>{ cityCount[p.city] = (cityCount[p.city]||0) + 1; });
+    document.getElementById('mapChengdu').textContent = (cityCount['成都']||0) + ' 个园区';
+    document.getElementById('mapChongqing').textContent = (cityCount['重庆']||0) + ' 个园区';
+    document.getElementById('mapGuiyang').textContent = (cityCount['贵阳']||0) + ' 个园区';
+
+    const cards = (pk.parks||[]).map(p=>`
+      <div class="card park">
+        <div class="park-head">
+          <div class="dot" style="background:${SWData.htmlEscape(p.color||'#22e3d6')};box-shadow:0 0 12px ${SWData.htmlEscape(p.color||'#22e3d6')}"></div>
+          <h3>${SWData.htmlEscape(p.name)}</h3>
+          <span class="loc">${SWData.htmlEscape(p.city)}</span>
+        </div>
+        <div class="row"><span>设计机柜</span><span>${p.design} 架</span></div>
+        <div class="row"><span>在运机柜</span><span>${p.running} 架</span></div>
+        <div class="row"><span>上架率</span><span>${p.occupancy}%</span></div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:${p.occupancy}%"></div></div>
+        <div class="row"><span>PUE</span><span>${p.pue}</span></div>
+        <div class="row"><span>SLA</span><span>${p.sla}%</span></div>
+        <div class="row"><span>运行状态</span><span><span class="badge ${SWData.htmlEscape(p.status_type||'green')}">${SWData.htmlEscape(p.status)}</span></span></div>
+      </div>
+    `).join('');
+
+    const sumDesign = (pk.parks||[]).reduce((s,p)=>s+(p.design||0),0);
+    const sumRunning = (pk.parks||[]).reduce((s,p)=>s+(p.running||0),0);
+    const totalRate = sumDesign? ((sumRunning/sumDesign)*100).toFixed(1) : '0';
+    const avgPue = (pk.parks||[]).length ? ((pk.parks).reduce((s,p)=>s+(p.pue||0),0)/pk.parks.length).toFixed(2) : '0';
+    const sumCard = `
+      <div class="card" style="background:var(--grad-soft);border-color:var(--line-strong)">
+        <div class="kpi-ico" style="background:var(--grad);color:#002">Σ</div>
+        <h3 style="margin:4px 0 12px;font-size:18px">合计</h3>
+        <div class="row" style="border:0;padding:6px 0"><span class="muted">设计总容量</span><span style="font-weight:600">${sumDesign.toLocaleString()} 架</span></div>
+        <div class="row" style="border:0;padding:6px 0"><span class="muted">在运总数</span><span style="font-weight:600">${sumRunning.toLocaleString()} 架</span></div>
+        <div class="row" style="border:0;padding:6px 0"><span class="muted">综合上架率</span><span style="font-weight:600;color:var(--cyan)">${totalRate}%</span></div>
+        <div class="row" style="border:0;padding:6px 0"><span class="muted">综合 PUE</span><span style="font-weight:600;color:var(--cyan)">${avgPue}</span></div>
+      </div>`;
+    document.getElementById('parkGrid').innerHTML = cards + sumCard;
+
+    SWChart.donutChart(document.getElementById('bizChart'), {
+      center:'业务构成', centerSub:'占比 %',
+      items: (pk.business||[]).map(b=> ({name:b.name, value:b.value, color:b.color, unit:'%'}))
+    });
+  }
+
+  // ---------- 3. operation ----------
+  const op = await SWData.loadData('operation');
+  if(op){
+    SWData.renderKpi(document.getElementById('opKpiGrid'), op.kpi || []);
+
+    SWChart.barLineChart(document.getElementById('eventChart'), {
+      labels: op.event_trend.labels,
+      bars:[
+        {name:'P2', values: op.event_trend.p2, color:'#ffb648'},
+        {name:'P3', values: op.event_trend.p3, color:'#3f8cff'}
+      ],
+      lines:[{name:'P1', values: op.event_trend.p1, color:'#ff5a6a'}]
+    });
+    SWChart.barLineChart(document.getElementById('changeChart'), {
+      labels: op.change_trend.labels,
+      bars:[{name:'变更数', values: op.change_trend.counts, color:'#22e3d6'}],
+      lines:[{name:'成功率', values: op.change_trend.success_rate, color:'#4ade80'}]
+    });
+
+    SWData.renderTable(document.getElementById('incidentTable'),
+      [
+        {label:'日期', key:'date'},
+        {label:'园区', key:'park'},
+        {label:'事件', key:'title'},
+        {label:'级别', render: r=> `<span class="badge ${SWData.htmlEscape(r.level_color||'grey')}">${SWData.htmlEscape(r.level)}</span>`},
+        {label:'影响范围', key:'scope'},
+        {label:'处置时长', key:'mttr'},
+        {label:'根因 / 整改', key:'root'}
+      ],
+      op.incidents || []
+    );
+
+    document.getElementById('drillGrid').innerHTML = (op.drills||[]).map(d=>`
+      <div class="card">
+        <h3 style="margin:0 0 8px;font-size:16px">${SWData.htmlEscape(d.title)}</h3>
+        <p class="muted" style="margin:0 0 12px;font-size:13px">${SWData.htmlEscape(d.desc)}</p>
+        <div class="progress"><span style="width:${d.progress}%"></span></div>
+        <div class="muted mt-8" style="font-size:12px">${SWData.htmlEscape(d.note)}</div>
+      </div>
+    `).join('');
+  }
+
+  // ---------- 4. delivery ----------
+  const dv = await SWData.loadData('delivery');
+  if(dv){
+    SWData.renderKpi(document.getElementById('dvKpiGrid'), dv.kpi || []);
+
+    document.getElementById('sopGrid').innerHTML = (dv.sop_stages||[]).map(s=>`
+      <div class="card">
+        <div style="color:var(--cyan);font-size:12px;letter-spacing:2px">${SWData.htmlEscape(s.step)}</div>
+        <h3 style="margin:8px 0;font-size:16px">${SWData.htmlEscape(s.title)}</h3>
+        <p class="muted" style="font-size:12px;margin:0;line-height:1.7">${SWData.htmlEscape(s.desc)}</p>
+      </div>
+    `).join('');
+
+    document.getElementById('abcGrid').innerHTML = (dv.abc||[]).map(a=>`
+      <div class="card">
+        <span class="badge ${SWData.htmlEscape(a.level_color)}">${SWData.htmlEscape(a.level)} 级 · ${SWData.htmlEscape(a.scope)}</span>
+        <h3 style="margin:10px 0;font-size:18px">${SWData.htmlEscape(a.title)}</h3>
+        <div class="row"><span class="muted" style="color:var(--text-3)">审批</span><span>${SWData.htmlEscape(a.approve)}</span></div>
+        <div class="row"><span class="muted" style="color:var(--text-3)">执行</span><span>${SWData.htmlEscape(a.exec)}</span></div>
+        <div class="row"><span class="muted" style="color:var(--text-3)">本季度</span><span>${SWData.htmlEscape(a.count)}</span></div>
+      </div>
+    `).join('');
+
+    SWChart.barLineChart(document.getElementById('deliveryChart'), {
+      labels: dv.trend.labels,
+      bars:[{name:'交付量', values: dv.trend.counts, color:'#3f8cff'}],
+      lines:[{name:'平均天数', values: dv.trend.avg_days, color:'#ffb648'}]
+    });
+
+    document.getElementById('toolGrid').innerHTML = (dv.tools||[]).map(t=>`
+      <div class="card">
+        <div class="kpi-ico">${SWData.htmlEscape(t.icon)}</div>
+        <h3 style="margin:6px 0 10px;font-size:18px">${SWData.htmlEscape(t.name)}</h3>
+        <p class="muted" style="margin:0 0 12px;font-size:13px;line-height:1.7">${SWData.htmlEscape(t.desc)}</p>
+        ${(t.rows||[]).map(r=>`<div class="row"><span class="muted" style="color:var(--text-3)">${SWData.htmlEscape(r[0])}</span><span>${SWData.htmlEscape(r[1])}</span></div>`).join('')}
+      </div>
+    `).join('');
+  }
+
+  // ---------- 5. cost ----------
+  const ct = await SWData.loadData('cost');
+  if(ct){
+    SWData.renderKpi(document.getElementById('ctKpiGrid'), ct.kpi || []);
+
+    document.getElementById('pueTargetSub').textContent = `目标线：${ct.pue_trend.target}（西南地区目标）`;
+    const targetLine = ct.pue_trend.labels.map(()=> ct.pue_trend.target);
+    SWChart.barLineChart(document.getElementById('pueChart'), {
+      labels: ct.pue_trend.labels, bars:[],
+      lines:[
+        {name:'PUE', values: ct.pue_trend.pue, color:'#22e3d6'},
+        {name:'目标', values: targetLine, color:'#ffb648'}
+      ]
+    });
+
+    SWData.renderTable(document.getElementById('projTable'),
+      [
+        {label:'项目', key:'name'},
+        {label:'园区', key:'park'},
+        {label:'类型', key:'type'},
+        {label:'状态', render: r=> `<span class="badge ${SWData.htmlEscape(r.status_color||'grey')}">${SWData.htmlEscape(r.status)}</span>`},
+        {label:'预估年节电', key:'saving'},
+        {label:'回收期', key:'payback'}
+      ],
+      ct.projects || []
+    );
+
+    SWChart.donutChart(document.getElementById('energyChart'), {
+      center:'能耗构成', centerSub:'占比 %',
+      items: (ct.energy_mix||[]).map(e=> ({name:e.name, value:e.value, color:e.color, unit:'%'}))
+    });
+    const totalSaving = (ct.saving_mix||[]).reduce((s,x)=> s+x.value, 0);
+    SWChart.donutChart(document.getElementById('savingChart'), {
+      center:'节电贡献', centerSub:`共 ${totalSaving.toLocaleString()} 万度`,
+      items: (ct.saving_mix||[]).map(e=> ({name:e.name, value:e.value, color:e.color, unit:'万度'}))
+    });
+  }
+
+  // ---------- 6. plan ----------
+  const pn = await SWData.loadData('plan');
+  if(pn){
+    SWData.renderTable(document.getElementById('planProjTable'),
+      [
+        {label:'项目', key:'name'},
+        {label:'主责园区', key:'park'},
+        {label:'类型', key:'type'},
+        {label:'进度', render: r=> `<div class="progress"><span style="width:${r.progress}%"></span></div>`},
+        {label:'里程碑', key:'milestone'},
+        {label:'状态', render: r=> `<span class="badge ${SWData.htmlEscape(r.status_color||'grey')}">${SWData.htmlEscape(r.status)}</span>`}
+      ],
+      pn.projects || []
+    );
+
+    document.getElementById('timeline').innerHTML = (pn.timeline||[]).map(t=>`
+      <div class="tl-item">
+        <div class="tl-date">${SWData.htmlEscape(t.date)}</div>
+        <div class="tl-title">${SWData.htmlEscape(t.title)}</div>
+        <div class="tl-desc">${SWData.htmlEscape(t.desc)}</div>
+      </div>
+    `).join('');
+
+    document.getElementById('riskList').innerHTML = (pn.risks||[]).map(r=>`
+      <li>
+        <div class="lv ${SWData.htmlEscape(r.level_class)}">${SWData.htmlEscape(r.level)}</div>
+        <div class="txt"><h4>${SWData.htmlEscape(r.title)}</h4><p>${SWData.htmlEscape(r.desc)}</p></div>
+      </li>
+    `).join('');
+
+    document.getElementById('resGrid').innerHTML = (pn.resources||[]).map(r=>`
+      <div class="card">
+        <div class="kpi-ico">${SWData.htmlEscape(r.icon)}</div>
+        <h3 style="margin:6px 0 10px;font-size:16px">${SWData.htmlEscape(r.title)}</h3>
+        <p class="muted" style="font-size:13px;margin:0;line-height:1.8">${SWData.htmlEscape(r.desc)}</p>
+      </div>
+    `).join('');
+  }
+})();
+
+/* === 滚动监听：导航高亮 + 回到顶部按钮 === */
+const sections = ['sec-overview','sec-parks','sec-operation','sec-delivery','sec-cost','sec-plan']
+  .map(id => document.getElementById(id));
+const navAnchors = document.querySelectorAll('.nav-links a');
+function onScroll(){
+  const y = window.scrollY + 120;
+  let cur = 0;
+  sections.forEach((s,i) => { if(s && s.offsetTop <= y) cur = i; });
+  navAnchors.forEach((a,i)=> a.classList.toggle('active', i === cur));
+  document.getElementById('topBtn').classList.toggle('show', window.scrollY > 400);
+}
+window.addEventListener('scroll', onScroll);
+onScroll();
+
+/* 平滑滚动 */
+navAnchors.forEach(a => a.addEventListener('click', e=>{
+  const href = a.getAttribute('href');
+  if(href && href.startsWith('#')){
+    e.preventDefault();
+    const tgt = document.querySelector(href);
+    if(tgt) tgt.scrollIntoView({behavior:'smooth'});
+  }
+}));
+</script>
+</body>
+</html>

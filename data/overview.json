@@ -1,0 +1,77 @@
+{
+  "report_meta": {
+    "data_source": "腾讯文档协作表格",
+    "updated_at": "2026-05-12 13:08",
+    "title": "守牢底线 · 提质增效",
+    "subtitle": "西南基础设施运营工作汇报",
+    "reporter": "西南运营组",
+    "period": "2026 Q1 – Q2",
+    "version": "v1.0"
+  },
+  "kpi": [
+    {
+      "icon": "🏢",
+      "label": "在运机柜总数",
+      "value": "12,860",
+      "unit": "架",
+      "delta": "↑ 本季度新增 480 架",
+      "delta_type": "up"
+    },
+    {
+      "icon": "📈",
+      "label": "综合上架率",
+      "value": "83.2",
+      "unit": "%",
+      "delta": "↑ 环比 +1.8pct",
+      "delta_type": "up"
+    },
+    {
+      "icon": "⚡",
+      "label": "综合 PUE",
+      "value": "1.28",
+      "unit": "",
+      "delta": "↓ 同比改善 0.03",
+      "delta_type": "up"
+    },
+    {
+      "icon": "🛡️",
+      "label": "SLA 达成率",
+      "value": "99.998",
+      "unit": "%",
+      "delta": "持续稳定",
+      "delta_type": "flat"
+    },
+    {
+      "icon": "🧩",
+      "label": "季度零星工程单",
+      "value": "326",
+      "unit": "单",
+      "delta": "↑ 交付提效 22%",
+      "delta_type": "up"
+    },
+    {
+      "icon": "💰",
+      "label": "年度节电预估",
+      "value": "2,180",
+      "unit": "万度",
+      "delta": "↑ 折算节约 ~1,700 万元",
+      "delta_type": "up"
+    },
+    {
+      "icon": "🔔",
+      "label": "P1+ 事件数",
+      "value": "0",
+      "unit": "起",
+      "delta": "连续 180 天零重大事件",
+      "delta_type": "up"
+    },
+    {
+      "icon": "👥",
+      "label": "在岗运营人员",
+      "value": "186",
+      "unit": "人",
+      "delta": "持证上岗率 100%",
+      "delta_type": "flat"
+    }
+  ]
+}

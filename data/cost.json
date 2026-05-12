@@ -1,0 +1,172 @@
+{
+  "kpi": [
+    {
+      "icon": "⚡",
+      "label": "综合 PUE",
+      "value": "1.28",
+      "unit": "",
+      "delta": "↓ 同比 0.03",
+      "delta_type": "up"
+    },
+    {
+      "icon": "🔋",
+      "label": "年度节电量",
+      "value": "2,180",
+      "unit": "万度",
+      "delta": "较基线年",
+      "delta_type": "up"
+    },
+    {
+      "icon": "💰",
+      "label": "年度成本节约",
+      "value": "1,700",
+      "unit": "万元",
+      "delta": "按 0.78 元/度折算",
+      "delta_type": "up"
+    },
+    {
+      "icon": "🌱",
+      "label": "碳减排量",
+      "value": "17,800",
+      "unit": "吨CO₂",
+      "delta": "等效",
+      "delta_type": "up"
+    }
+  ],
+  "pue_trend": {
+    "labels": [
+      "6月",
+      "7月",
+      "8月",
+      "9月",
+      "10月",
+      "11月",
+      "12月",
+      "1月",
+      "2月",
+      "3月",
+      "4月",
+      "5月"
+    ],
+    "pue": [
+      1.34,
+      1.36,
+      1.35,
+      1.32,
+      1.3,
+      1.28,
+      1.27,
+      1.28,
+      1.27,
+      1.28,
+      1.29,
+      1.28
+    ],
+    "target": 1.3
+  },
+  "projects": [
+    {
+      "name": "冷冻水温提升 + AI 调优",
+      "park": "重庆云兴网晟",
+      "type": "温控优化",
+      "status": "已落地",
+      "status_color": "green",
+      "saving": "620 万度",
+      "payback": "已回收"
+    },
+    {
+      "name": "变频冷机改造",
+      "park": "贵安联通",
+      "type": "设备升级",
+      "status": "已落地",
+      "status_color": "green",
+      "saving": "480 万度",
+      "payback": "1.8 年"
+    },
+    {
+      "name": "冷热通道封闭",
+      "park": "成都 A / B",
+      "type": "气流组织",
+      "status": "已落地",
+      "status_color": "green",
+      "saving": "380 万度",
+      "payback": "1.2 年"
+    },
+    {
+      "name": "UPS 休眠策略",
+      "park": "重庆润泽",
+      "type": "配电优化",
+      "status": "推进中",
+      "status_color": "blue",
+      "saving": "预估 290 万度",
+      "payback": "预估 2.0 年"
+    },
+    {
+      "name": "自然冷源延长运行",
+      "park": "贵安联通",
+      "type": "冷源策略",
+      "status": "推进中",
+      "status_color": "blue",
+      "saving": "预估 410 万度",
+      "payback": "预估 1.5 年"
+    },
+    {
+      "name": "电费结算优化（峰谷套餐）",
+      "park": "三地五园区",
+      "type": "商务优化",
+      "status": "谈判中",
+      "status_color": "amber",
+      "saving": "—（结算侧）",
+      "payback": "预估 400 万元/年"
+    }
+  ],
+  "energy_mix": [
+    {
+      "name": "IT 设备",
+      "value": 62,
+      "color": "#3f8cff"
+    },
+    {
+      "name": "制冷",
+      "value": 26,
+      "color": "#22e3d6"
+    },
+    {
+      "name": "配电损耗",
+      "value": 8,
+      "color": "#ffb648"
+    },
+    {
+      "name": "照明/其他",
+      "value": 4,
+      "color": "#4ade80"
+    }
+  ],
+  "saving_mix": [
+    {
+      "name": "冷冻水调优",
+      "value": 620,
+      "color": "#22e3d6"
+    },
+    {
+      "name": "变频冷机",
+      "value": 480,
+      "color": "#3f8cff"
+    },
+    {
+      "name": "自然冷源",
+      "value": 410,
+      "color": "#4ade80"
+    },
+    {
+      "name": "通道封闭",
+      "value": 380,
+      "color": "#ffb648"
+    },
+    {
+      "name": "UPS 休眠",
+      "value": 290,
+      "color": "#b48cff"
+    }
+  ]
+}
