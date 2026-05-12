@@ -287,28 +287,42 @@
           <h3>${SWData.htmlEscape(p.name)}</h3>
           <span class="loc">${SWData.htmlEscape(p.city)}</span>
         </div>
-        <div class="row"><span>设计机柜</span><span>${p.design} 架</span></div>
-        <div class="row"><span>在运机柜</span><span>${p.running} 架</span></div>
+        <div class="row"><span>设计机柜</span><span>${(p.design||0).toLocaleString()} 架</span></div>
+        <div class="row"><span>开电机柜</span><span>${(p.running||0).toLocaleString()} 架</span></div>
         <div class="row"><span>上架率</span><span>${p.occupancy}%</span></div>
         <div class="bar-wrap"><div class="bar-fill" style="width:${p.occupancy}%"></div></div>
-        <div class="row"><span>PUE</span><span>${p.pue}</span></div>
-        <div class="row"><span>SLA</span><span>${p.sla}%</span></div>
+        <div class="row"><span>年均 PUE</span><span>${p.pue||'-'}</span></div>
+        <div class="row"><span>设计IT功率</span><span>${p.it_design_mw||'-'} MW</span></div>
+        <div class="row"><span>实际IT功率</span><span>${p.it_actual_kw? (p.it_actual_kw/1000).toFixed(2)+' MW' : '-'}</span></div>
+        <div class="row"><span>服务器</span><span>${p.servers? p.servers.toLocaleString() : '-'} 台</span></div>
+        <div class="row"><span>GPU 卡数</span><span>${p.gpus? p.gpus.toLocaleString() : '-'}</span></div>
+        <div class="row"><span>模组（已交付/在建）</span><span>${p.delivered_modules||0}/${p.building_modules||0}</span></div>
+        <div class="row"><span>北斗排名(3月)</span><span>${SWData.htmlEscape(p.ranking||'-')}</span></div>
+        <div class="row"><span>当月重大事件</span><span>${p.events_l1||0} 起</span></div>
         <div class="row"><span>运行状态</span><span><span class="badge ${SWData.htmlEscape(p.status_type||'green')}">${SWData.htmlEscape(p.status)}</span></span></div>
+        ${p.updater||p.update_date ? `<div class="row" style="border:0;padding-top:8px;font-size:11px;color:var(--text-3)"><span>更新</span><span>${SWData.htmlEscape(p.updater||'-')} · ${SWData.htmlEscape(p.update_date||'-')}</span></div>` : ''}
       </div>
     `).join('');
 
     const sumDesign = (pk.parks||[]).reduce((s,p)=>s+(p.design||0),0);
     const sumRunning = (pk.parks||[]).reduce((s,p)=>s+(p.running||0),0);
+    const sumServers = (pk.parks||[]).reduce((s,p)=>s+(p.servers||0),0);
+    const sumGPU = (pk.parks||[]).reduce((s,p)=>s+(p.gpus||0),0);
+    const sumITMW = (pk.parks||[]).reduce((s,p)=>s+(p.it_design_mw||0),0);
     const totalRate = sumDesign? ((sumRunning/sumDesign)*100).toFixed(1) : '0';
-    const avgPue = (pk.parks||[]).length ? ((pk.parks).reduce((s,p)=>s+(p.pue||0),0)/pk.parks.length).toFixed(2) : '0';
+    const validPueParks = (pk.parks||[]).filter(p=> p.pue>0);
+    const avgPue = validPueParks.length ? (validPueParks.reduce((s,p)=>s+p.pue,0)/validPueParks.length).toFixed(2) : '-';
     const sumCard = `
       <div class="card" style="background:var(--grad-soft);border-color:var(--line-strong)">
         <div class="kpi-ico" style="background:var(--grad);color:#002">Σ</div>
         <h3 style="margin:4px 0 12px;font-size:18px">合计</h3>
         <div class="row" style="border:0;padding:6px 0"><span class="muted">设计总容量</span><span style="font-weight:600">${sumDesign.toLocaleString()} 架</span></div>
-        <div class="row" style="border:0;padding:6px 0"><span class="muted">在运总数</span><span style="font-weight:600">${sumRunning.toLocaleString()} 架</span></div>
+        <div class="row" style="border:0;padding:6px 0"><span class="muted">开电总数</span><span style="font-weight:600">${sumRunning.toLocaleString()} 架</span></div>
         <div class="row" style="border:0;padding:6px 0"><span class="muted">综合上架率</span><span style="font-weight:600;color:var(--cyan)">${totalRate}%</span></div>
-        <div class="row" style="border:0;padding:6px 0"><span class="muted">综合 PUE</span><span style="font-weight:600;color:var(--cyan)">${avgPue}</span></div>
+        <div class="row" style="border:0;padding:6px 0"><span class="muted">设计 IT 总功率</span><span style="font-weight:600">${sumITMW.toFixed(1)} MW</span></div>
+        <div class="row" style="border:0;padding:6px 0"><span class="muted">服务器总数</span><span style="font-weight:600">${sumServers.toLocaleString()}</span></div>
+        <div class="row" style="border:0;padding:6px 0"><span class="muted">GPU 总卡数</span><span style="font-weight:600">${sumGPU.toLocaleString()}</span></div>
+        <div class="row" style="border:0;padding:6px 0"><span class="muted">平均 PUE</span><span style="font-weight:600;color:var(--cyan)">${avgPue}</span></div>
       </div>`;
     document.getElementById('parkGrid').innerHTML = cards + sumCard;
 

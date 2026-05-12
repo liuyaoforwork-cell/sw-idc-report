@@ -1,7 +1,7 @@
 {
   "report_meta": {
     "data_source": "腾讯文档协作表格",
-    "updated_at": "2026-05-13 06:12",
+    "updated_at": "2026-05-13 06:39",
     "title": "守牢底线 · 提质增效",
     "subtitle": "西南基础设施运营工作汇报",
     "reporter": "西南运营组",
@@ -12,7 +12,7 @@
     {
       "icon": "🏢",
       "label": "已交付模组数量",
-      "value": "17",
+      "value": "20",
       "unit": "个",
       "delta": "↑ 本季度新增 480 架",
       "delta_type": "up"
