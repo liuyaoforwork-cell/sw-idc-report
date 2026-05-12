@@ -1,150 +1,119 @@
 {
-  "kpi": [
-    {
-      "icon": "📦",
-      "label": "季度交付单数",
-      "value": "326",
-      "unit": "单",
-      "delta": "↑ 同比 +18%",
-      "delta_type": "up"
-    },
-    {
-      "icon": "⚡",
-      "label": "平均交付时长",
-      "value": "4.2",
-      "unit": "天",
-      "delta": "↓ 同比 -22%",
-      "delta_type": "up"
-    },
-    {
-      "icon": "✅",
-      "label": "一次验收通过率",
-      "value": "96.3",
-      "unit": "%",
-      "delta": "↑ +3.1pct",
-      "delta_type": "up"
-    },
-    {
-      "icon": "🎯",
-      "label": "SOP 执行符合率",
-      "value": "100",
-      "unit": "%",
-      "delta": "强制执行",
-      "delta_type": "flat"
-    }
-  ],
-  "sop_stages": [
-    {
-      "step": "STEP 01",
-      "title": "需求受理",
-      "desc": "需求登记 · 初步评估 · 分级定级"
-    },
-    {
-      "step": "STEP 02",
-      "title": "方案设计",
-      "desc": "技术方案 · 风险评估 · 资源排期"
-    },
-    {
-      "step": "STEP 03",
-      "title": "施工准备",
-      "desc": "物资 · 交底 · 应急预案"
-    },
-    {
-      "step": "STEP 04",
-      "title": "施工执行",
-      "desc": "过程监督 · 质量记录 · 安全管控"
-    },
-    {
-      "step": "STEP 05",
-      "title": "验收归档",
-      "desc": "验收确认 · 图纸更新 · 资料归档"
-    }
-  ],
-  "abc": [
-    {
-      "level": "A",
-      "level_color": "red",
-      "scope": "高风险",
-      "title": "涉带电 / 热通道 / 冷源主路",
-      "approve": "部门负责人",
-      "exec": "双人背靠背核验",
-      "count": "28 单（8.6%）"
-    },
-    {
-      "level": "B",
-      "level_color": "amber",
-      "scope": "中风险",
-      "title": "配电分支 / 列头 / 弱电主干",
-      "approve": "园区经理",
-      "exec": "现场监督 + 记录",
-      "count": "126 单（38.7%）"
-    },
-    {
-      "level": "C",
-      "level_color": "green",
-      "scope": "低风险",
-      "title": "机柜内 / 弱电尾端 / 标识",
-      "approve": "运维主管",
-      "exec": "标准作业",
-      "count": "172 单（52.7%）"
-    }
-  ],
-  "trend": {
-    "labels": [
-      "12月",
-      "1月",
-      "2月",
-      "3月",
-      "4月",
-      "5月"
-    ],
-    "counts": [
-      92,
-      101,
-      86,
-      118,
-      107,
-      122
-    ],
-    "avg_days": [
-      5.4,
-      5.1,
-      4.8,
-      4.5,
-      4.3,
-      4.2
-    ]
+  "summary": {
+    "total": 9,
+    "done": 0,
+    "in_progress": 7,
+    "pending": 2,
+    "completion_rate": 0.0
   },
-  "tools": [
+  "projects": [
     {
-      "icon": "🧩",
-      "name": "零星工程平台（自研）",
-      "desc": "已上线需求登记、分级、进度看板。当前为前端本地存储架构，正规划迁移至 WITH 低代码平台，支持企微登录多用户协作。",
-      "rows": [
-        [
-          "当前状态",
-          "已运行"
-        ],
-        [
-          "下一步",
-          "迁移 WITH 多用户版本"
-        ]
-      ]
+      "seq": "1",
+      "proj_type": "自建",
+      "name": "重庆-泰和",
+      "sub_item": "TB风冷",
+      "capacity": "2",
+      "builder": "德衡",
+      "stage": "深化设计",
+      "stage_color": "blue",
+      "deadline": "2026.11.30",
+      "note": ""
     },
     {
-      "icon": "📋",
-      "name": "SOP 数字化",
-      "desc": "iWiki 内沉淀标准 SOP 文档，9 项关键检查点表单化，施工前强制填报。",
-      "rows": [
-        [
-          "文档覆盖",
-          "32 份 SOP"
-        ],
-        [
-          "表单执行",
-          "100% 必填"
-        ]
-      ]
+      "seq": "2",
+      "proj_type": "自建",
+      "name": "重庆-泰和",
+      "sub_item": "TB风冷",
+      "capacity": "1",
+      "builder": "本贸",
+      "stage": "深化设计",
+      "stage_color": "blue",
+      "deadline": "2026.11.30",
+      "note": ""
+    },
+    {
+      "seq": "3",
+      "proj_type": "自建",
+      "name": "重庆-泰和",
+      "sub_item": "TB液冷",
+      "capacity": "2",
+      "builder": "本贸",
+      "stage": "深化设计",
+      "stage_color": "blue",
+      "deadline": "2026.11.30",
+      "note": ""
+    },
+    {
+      "seq": "4",
+      "proj_type": "自建",
+      "name": "重庆-泰和",
+      "sub_item": "TB液冷",
+      "capacity": "2",
+      "builder": "科华",
+      "stage": "深化设计",
+      "stage_color": "blue",
+      "deadline": "2026.11.30",
+      "note": ""
+    },
+    {
+      "seq": "5",
+      "proj_type": "自建",
+      "name": "贵安-七星",
+      "sub_item": "山洞风冷",
+      "capacity": "1",
+      "builder": "本贸",
+      "stage": "机电施工",
+      "stage_color": "blue",
+      "deadline": "",
+      "note": ""
+    },
+    {
+      "seq": "6",
+      "proj_type": "现货",
+      "name": "贵阳-天枢",
+      "sub_item": "",
+      "capacity": "",
+      "builder": "",
+      "stage": "",
+      "stage_color": "grey",
+      "deadline": "",
+      "note": ""
+    },
+    {
+      "seq": "7",
+      "proj_type": "现货",
+      "name": "重庆-同乐",
+      "sub_item": "",
+      "capacity": "1",
+      "builder": "云兴网晟",
+      "stage": "机电施工",
+      "stage_color": "blue",
+      "deadline": "2026.6.30",
+      "note": ""
+    },
+    {
+      "seq": "8",
+      "proj_type": "现货",
+      "name": "重庆-九龙",
+      "sub_item": "传统水冷",
+      "capacity": "2",
+      "builder": "润泽",
+      "stage": "机电施工",
+      "stage_color": "blue",
+      "deadline": "2026.6.30",
+      "note": ""
+    },
+    {
+      "seq": "9",
+      "proj_type": "现货",
+      "name": "成都-高新",
+      "sub_item": "",
+      "capacity": "",
+      "builder": "",
+      "stage": "",
+      "stage_color": "grey",
+      "deadline": "",
+      "note": ""
     }
   ]
 }

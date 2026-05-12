@@ -171,30 +171,19 @@
 
   <div class="section-divider"></div>
 
-  <!-- ========== 4. 工程交付 ========== -->
+  <!-- ========== 4. 工程交付（项目台账版） ========== -->
   <section class="section section-block" id="sec-delivery">
     <div class="section-head">
       <div class="bar"></div>
       <h2>工程交付</h2>
-      <div class="desc">SOP 标准化、A/B/C 分级、平台化建设</div>
+      <div class="desc">重点交付项目台账</div>
     </div>
 
-    <div class="grid grid-4" id="dvKpiGrid" style="margin-bottom:24px"></div>
+    <!-- 汇总卡 -->
+    <div class="grid grid-4" id="dvSummary" style="margin-bottom:24px"></div>
 
-    <h3 style="margin:8px 0 12px;font-size:16px;color:var(--text-2)">零星改造标准流程（5 阶段）</h3>
-    <div class="grid" id="sopGrid" style="grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:24px"></div>
-
-    <h3 style="margin:24px 0 12px;font-size:16px;color:var(--text-2)">A / B / C 分级管理</h3>
-    <div class="grid grid-3" id="abcGrid" style="margin-bottom:24px"></div>
-
-    <div class="chart-box" style="margin-bottom:20px">
-      <h3>月度交付量 & 平均交付时长</h3>
-      <div class="sub">柱：单数 / 折线：平均天数</div>
-      <div class="chart-canvas" id="deliveryChart"></div>
-    </div>
-
-    <h3 style="margin:24px 0 12px;font-size:16px;color:var(--text-2)">平台化工具建设</h3>
-    <div class="grid grid-2" id="toolGrid"></div>
+    <h3 style="margin:8px 0 12px;font-size:16px;color:var(--text-2)">项目明细</h3>
+    <div id="dvProjTable"></div>
   </section>
 
   <div class="section-divider"></div>
@@ -374,40 +363,30 @@
   // ---------- 4. delivery ----------
   const dv = await SWData.loadData('delivery');
   if(dv){
-    SWData.renderKpi(document.getElementById('dvKpiGrid'), dv.kpi || []);
+    // 4 张汇总卡
+    const s = dv.summary || {};
+    SWData.renderKpi(document.getElementById('dvSummary'), [
+      {icon:"📋", label:"重点项目总数", value:String(s.total||0), unit:"个", delta:"在建+已完成", delta_type:"flat"},
+      {icon:"✅", label:"已完成", value:String(s.done||0), unit:"个", delta:`完成率 ${s.completion_rate||0}%`, delta_type:"up"},
+      {icon:"🚧", label:"推进中", value:String(s.in_progress||0), unit:"个", delta:"含设计/施工/调试", delta_type:"flat"},
+      {icon:"⏳", label:"待启动/其他", value:String(s.pending||0), unit:"个", delta:"待办", delta_type:"flat"},
+    ]);
 
-    document.getElementById('sopGrid').innerHTML = (dv.sop_stages||[]).map(s=>`
-      <div class="card">
-        <div style="color:var(--cyan);font-size:12px;letter-spacing:2px">${SWData.htmlEscape(s.step)}</div>
-        <h3 style="margin:8px 0;font-size:16px">${SWData.htmlEscape(s.title)}</h3>
-        <p class="muted" style="font-size:12px;margin:0;line-height:1.7">${SWData.htmlEscape(s.desc)}</p>
-      </div>
-    `).join('');
-
-    document.getElementById('abcGrid').innerHTML = (dv.abc||[]).map(a=>`
-      <div class="card">
-        <span class="badge ${SWData.htmlEscape(a.level_color)}">${SWData.htmlEscape(a.level)} 级 · ${SWData.htmlEscape(a.scope)}</span>
-        <h3 style="margin:10px 0;font-size:18px">${SWData.htmlEscape(a.title)}</h3>
-        <div class="row"><span class="muted" style="color:var(--text-3)">审批</span><span>${SWData.htmlEscape(a.approve)}</span></div>
-        <div class="row"><span class="muted" style="color:var(--text-3)">执行</span><span>${SWData.htmlEscape(a.exec)}</span></div>
-        <div class="row"><span class="muted" style="color:var(--text-3)">本季度</span><span>${SWData.htmlEscape(a.count)}</span></div>
-      </div>
-    `).join('');
-
-    SWChart.barLineChart(document.getElementById('deliveryChart'), {
-      labels: dv.trend.labels,
-      bars:[{name:'交付量', values: dv.trend.counts, color:'#3f8cff'}],
-      lines:[{name:'平均天数', values: dv.trend.avg_days, color:'#ffb648'}]
-    });
-
-    document.getElementById('toolGrid').innerHTML = (dv.tools||[]).map(t=>`
-      <div class="card">
-        <div class="kpi-ico">${SWData.htmlEscape(t.icon)}</div>
-        <h3 style="margin:6px 0 10px;font-size:18px">${SWData.htmlEscape(t.name)}</h3>
-        <p class="muted" style="margin:0 0 12px;font-size:13px;line-height:1.7">${SWData.htmlEscape(t.desc)}</p>
-        ${(t.rows||[]).map(r=>`<div class="row"><span class="muted" style="color:var(--text-3)">${SWData.htmlEscape(r[0])}</span><span>${SWData.htmlEscape(r[1])}</span></div>`).join('')}
-      </div>
-    `).join('');
+    // 项目明细表
+    SWData.renderTable(document.getElementById('dvProjTable'),
+      [
+        {label:'序号', key:'seq'},
+        {label:'类型', render: r=> `<span class="badge ${r.proj_type==='自建'?'blue':'amber'}">${SWData.htmlEscape(r.proj_type||'-')}</span>`},
+        {label:'项目', key:'name'},
+        {label:'子项', key:'sub_item'},
+        {label:'容量', key:'capacity'},
+        {label:'建设单位', key:'builder'},
+        {label:'当前阶段', render: r=> `<span class="badge ${SWData.htmlEscape(r.stage_color||'grey')}">${SWData.htmlEscape(r.stage||'-')}</span>`},
+        {label:'截止时间', key:'deadline'},
+        {label:'备注', key:'note'},
+      ],
+      dv.projects || []
+    );
   }
 
   // ---------- 5. cost ----------
